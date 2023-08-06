@@ -89,7 +89,6 @@ def preprocess_data(data: titanicData):
 # define post method to get prediction from model
 @api.post("/predict/")
 def predict_from_preprocessed(data: modelData):
-
 	# get data from request body
 	inputData = data.dict()
 	# convert to pd DF since sklearn cannot predict from dict
@@ -97,7 +96,7 @@ def predict_from_preprocessed(data: modelData):
 	
 	# load the Random Forest Classifier
 	with open("./rfSimple.pkl", 'rb') as file:
-    	    rf = pickle.load(file)
+		rf = pickle.load(file)
     	# make predictions
 	SurvivalProba = rf.predict_proba(inputDF)[0,1]
 	survPerc = round(SurvivalProba*100, 1)

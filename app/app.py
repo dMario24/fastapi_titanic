@@ -12,7 +12,7 @@ class titanicData(BaseModel):
 	family_size: int
 	sex: str
 	embarked: str
-	
+
 # preprocessed data as returned from API
 class modelData(BaseModel):
 	Age: int
@@ -44,12 +44,12 @@ data = {"Age": Age,
 dataJSON = json.dumps(data) # create json object from dict
 
 # preprocess data by making post request to the API
-r = requests.post(url = "http://titanicapi:8000/preprocess/", data=dataJSON)
+r = requests.post(url="http://localhost:8000/preprocess/", data=dataJSON)
 preprocessedData = r.json()
 preprocessedJSON = json.dumps(preprocessedData)
 
 # make prediction by making post request to the API
-pred = requests.post(url = "http://titanicapi:8000/predict/", data=preprocessedJSON)
+pred = requests.post(url="http://localhost:8000/predict/", data=preprocessedJSON)
 # display survival probability
 st.image("./static/titanic.jpg", use_column_width=True)
 st.write("Your chance of Survival based on the information provided is: {}%.".format(pred.json()))
@@ -61,7 +61,7 @@ if st.checkbox("Show Details"):
 	st.write(preprocessedData)
 	st.write("In a last call to the API, this preprocessed data is sent via another post request to the `/predict/` endpoint. This endpoint returns the survival probability in percent:")
 	st.write(pred.json())
-	
+
 
 
 
